@@ -1,0 +1,16 @@
+{
+  "name": "number-to-locale-string",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "rimraf dist && tsc",
+    "prepare": "npm run build"
+  },
+  "author": "dev.zarghami@gmail.com",
+  "license": "MIT",
+  "description": "number, localization, typescript",
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.7.3"
+  }
+}
