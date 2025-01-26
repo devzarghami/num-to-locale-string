@@ -93,7 +93,7 @@ Returns a `Promise<string>` containing the number's string representation in the
 Clone the repository and install dependencies:
 
 ```bash
-git clone https://github.com/devzarghami/number-to-locale-string
+git clone https://github.com/devzarghami/num-to-locale-string
 cd number-to-string-locale
 npm install
 ```
@@ -112,7 +112,7 @@ npm test
 
 ## Contributing
 
-Contributions are welcome! Feel free to open issues or submit pull requests on the [GitHub repository](https://github.com/devzarghami/number-to-locale-string).
+Contributions are welcome! Feel free to open issues or submit pull requests on the [GitHub repository](https://github.com/devzarghami/num-to-locale-string).
 
 ## License
 
