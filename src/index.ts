@@ -16,12 +16,22 @@ export interface Locale {
     decimalSuffixes: string[];
 }
 
+let defaultLocale: Locale | null = null;
+
+/**
+ * Set the default locale.
+ * @param localeKey - The locale to set as the default.
+ */
+export const setDefaultLocale = async (localeKey: Locales): Promise<void> => {
+    defaultLocale = await loadLocale(localeKey);
+};
+
 /**
  * A utility function to lazily load locale files.
  * @param locale - The locale to load.
  * @returns Promise<Locale>
  */
-export const loadLocale = async (locale: Locales): Promise<Locale> => {
+const loadLocale = async (locale: Locales): Promise<Locale> => {
     switch (locale) {
         case Locales.FA:
             return await import("./locales/fa.json");
@@ -102,10 +112,14 @@ const tinyNumToWord = (num: string, locale: Locale): string => {
     return out.join(delimiter);
 };
 
-export const numberToString = async (input: number | string, localeKey: Locales): Promise<string> => {
-    const locale = await loadLocale(localeKey);
+export const numberToString = (input: number | string): string => {
+    // Use default locale if none is provided
 
-    const {zero, negative, delimiter, letters} = locale;
+    if (!defaultLocale) {
+        throw new Error("Locale is not set. Please set a default locale using setDefaultLocale.");
+    }
+
+    const {zero, negative, delimiter, letters} = defaultLocale;
 
     input = input.toString().replace(/[^0-9.-]/g, "");
     let isNegative = false;
@@ -137,7 +151,7 @@ export const numberToString = async (input: number | string, localeKey: Locales)
     const out: string[] = [];
 
     for (let i = 0; i < slicedNumber.length; i++) {
-        const converted = tinyNumToWord(slicedNumber[i], locale);
+        const converted = tinyNumToWord(slicedNumber[i], defaultLocale);
         if (converted !== "") {
             out.push(converted + letters[4][slicedNumber.length - (i + 1)]);
         }
@@ -149,7 +163,7 @@ export const numberToString = async (input: number | string, localeKey: Locales)
             return (
                 (isNegative ? negative : "") +
                 out.join(delimiter) +
-                " point " +
+                " . " +
                 decimalPart
             );
         }

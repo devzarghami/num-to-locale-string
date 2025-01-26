@@ -1,120 +1,111 @@
-# num-to-string-locale
 
-`num-to-string-locale` is a lightweight TypeScript package that converts numbers to their string representation in multiple languages. The package supports lazy loading of locale files, ensuring optimal performance.
+# Number to String Conversion
+
+This repository provides a utility for converting numbers into their written form in multiple languages. It supports various locales and allows the user to define a default locale for the conversion.
 
 ## Features
 
-- Converts numbers to words in multiple languages.
-- Supports negative numbers and decimal points.
-- Includes lazy loading for locale files.
-- Extensible and easy to use.
+- Convert numbers to words in multiple languages.
+- Supports localization for several languages (e.g., English, Arabic, French, German, Spanish, Turkish, Persian).
+- Handles decimal and negative numbers.
+- Customizable locale definitions for fine-grained control over the formatting.
 
 ## Installation
 
-Install the package using npm:
+You can install the script via npm:
 
 ```bash
-npm install num-to-string-locale
+npm install number-to-word
 ```
 
 or using yarn:
 
 ```bash
-yarn add num-to-string-locale
+yarn add number-to-word
 ```
-
-## Supported Languages
-
-The following languages are supported:
-
-- English (`Locales.EN`)
-- Persian (`Locales.FA`)
-- Arabic (`Locales.AR`)
-- French (`Locales.FR`)
-- German (`Locales.DE`)
-- Spanish (`Locales.ES`)
-- Turkish (`Locales.TR`)
+Alternatively, include it in your project directly.
 
 ## Usage
-
-### Importing the Function
-
-The `numberToString` function is the main method to convert numbers to words. Use it with a specified locale.
-
-### Example Code
+### Setting the Default Locale
+To start using the script, you need to set a default locale. This can be done using the setDefaultLocale function.
 
 ```typescript
-import { numberToString, Locales } from "num-to-string-locale";
+import { setDefaultLocale, Locales } from 'path-to-your-script';
 
-(async () => {
-    // Convert numbers to words in English
-    console.log(await numberToString(1234567, Locales.EN)); // "one million two hundred thirty-four thousand five hundred sixty-seven"
+// Set the default locale to English
+await setDefaultLocale(Locales.EN);
 
-    // Convert numbers to words in Persian
-    console.log(await numberToString(1234567, Locales.FA)); // "یک میلیون دویست و سی و چهار هزار پانصد و شصت و هفت"
+```
+### Converting Numbers to Words
+Once the locale is set, you can use the `numberToString` function to convert numbers into their written form.
 
-    // Convert negative numbers
-    console.log(await numberToString(-123, Locales.AR)); // "سالب مائة وثلاثة وعشرون"
+```typescript
+import { numberToString } from 'path-to-your-script';
 
-    // Convert decimal numbers
-    console.log(await numberToString(123.45, Locales.FR)); // "cent vingt-trois virgule quarante-cinq"
-})();
+const result = numberToString(1234.56);
+console.log(result); // Output will depend on the default locale
+
+```
+### Available Locales
+The available locales are defined in the `Locales` enum:
+```typescript
+export enum Locales {
+    FA = "fa", // Persian
+    EN = "en", // English
+    AR = "ar", // Arabic
+    FR = "fr", // French
+    DE = "de", // German
+    ES = "es", // Spanish
+    TR = "tr", // Turkish
+}
+```
+To use a specific locale, pass the corresponding Locales enum value to the setDefaultLocale function.
+
+### Custom Locale Files
+The locales are loaded dynamically from separate JSON files, and you can modify or add new locales by editing or creating the appropriate `.json` files within the `locales` directory. Each locale should follow the structure defined in the `Locale` interface.
+```json
+{
+    "delimiter": " ",
+    "zero": "zero",
+    "negative": "minus",
+    "letters": [
+        ["one", "two", "three", "four", "five", "six", "seven", "eight", "nine"],
+        ["ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen", "seventeen", "eighteen", "nineteen"],
+        ["twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"],
+        ["hundred"]
+    ],
+    "decimalSuffixes": ["point"]
+}
+```
+### Handling Negative Numbers and Decimals
+- `Negative numbers`: The script will prepend the locale’s `negative` string when the number is negative.
+- `Decimal numbers`: Decimal parts are appended after the whole number with a separator, typically `"."`, followed by the decimal digits as words.
+
+### Error Handling
+If you attempt to call `numberToString` without setting a default locale, an error will be thrown:
+```text
+Error: Locale is not set. Please set a default locale using setDefaultLocale.
+```
+If you pass an unsupported locale to `setDefaultLocale`, an error will also be thrown:
+```text
+Error: Locale <locale> is not supported.
 ```
 
-### Lazy Loading of Locale Files
+## Locale Configuration
+The `Locale` interface defines how the locale-specific data should be structured:
+```typescript
+export interface Locale {
+    delimiter: string; // Character separating parts of the number (e.g., " " for space)
+    zero: string; // Word for zero
+    negative: string; // Word for negative numbers
+    letters: string[][]; // Word representations for single digits, tens, hundreds, etc.
+    decimalSuffixes: string[]; // Words for decimal parts
+}
 
-Locale files are dynamically imported to optimize performance. This ensures that only the necessary files are loaded when a specific locale is used.
-
-## API Reference
-
-### `numberToString(input: number | string, localeKey: Locales): Promise<string>`
-
-- **`input`**: The number or numeric string to be converted.
-- **`localeKey`**: A locale key from the `Locales` enum.
-
-Returns a `Promise<string>` containing the number's string representation in the specified language.
-
-### Enum: `Locales`
-
-| Key | Description |
-| --- | ----------- |
-| `Locales.FA` | Persian |
-| `Locales.EN` | English |
-| `Locales.AR` | Arabic |
-| `Locales.FR` | French |
-| `Locales.DE` | German |
-| `Locales.ES` | Spanish |
-| `Locales.TR` | Turkish |
-
-## Development
-
-### Running Locally
-
-Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/devzarghami/num-to-locale-string
-cd num-to-string-locale
-npm install
 ```
-
-### Build the Package
-
-```bash
-npm run build
-```
-
-### Run Tests
-
-```bash
-npm test
-```
-
 ## Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests on the [GitHub repository](https://github.com/devzarghami/num-to-locale-string).
+Feel free to fork this repository and contribute by adding new locales or improving the existing code.
 
 ## License
 
 This project is licensed under the MIT License. See the LICENSE file for details.
-

@@ -1,6 +1,6 @@
 {
-  "name": "num-to-locale-string",
-  "version": "1.0.1",
+  "name": "number-to-word",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
     "build": "rimraf dist && tsc",
