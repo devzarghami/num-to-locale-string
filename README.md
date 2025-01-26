@@ -14,13 +14,13 @@ This repository provides a utility for converting numbers into their written for
 You can install the script via npm:
 
 ```bash
-npm install number-to-string
+npm install number-to-locale-text
 ```
 
 or using yarn:
 
 ```bash
-yarn add number-to-string
+yarn add number-to-locale-text
 ```
 Alternatively, include it in your project directly.
 
@@ -29,7 +29,7 @@ Alternatively, include it in your project directly.
 To start using the script, you need to set a default locale. This can be done using the setDefaultLocale function.
 
 ```typescript
-import { setDefaultLocale, Locales } from 'path-to-your-script';
+import { setDefaultLocale, Locales } from 'number-to-locale-text';
 
 // Set the default locale to English
 await setDefaultLocale(Locales.EN);
@@ -39,7 +39,7 @@ await setDefaultLocale(Locales.EN);
 Once the locale is set, you can use the `numberToString` function to convert numbers into their written form.
 
 ```typescript
-import { numberToString } from 'path-to-your-script';
+import { numberToString } from 'number-to-locale-text';
 
 const result = numberToString(1234.56);
 console.log(result); // Output will depend on the default locale

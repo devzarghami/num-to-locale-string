@@ -1,5 +1,5 @@
 {
-  "name": "number-to-string",
+  "name": "number-to-locale-text",
   "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
