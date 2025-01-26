@@ -14,13 +14,13 @@ This repository provides a utility for converting numbers into their written for
 You can install the script via npm:
 
 ```bash
-npm install number-to-word
+npm install number-to-string
 ```
 
 or using yarn:
 
 ```bash
-yarn add number-to-word
+yarn add number-to-string
 ```
 Alternatively, include it in your project directly.
 
