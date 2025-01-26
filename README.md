@@ -4,7 +4,6 @@
 This repository provides a utility for converting numbers into their written form in multiple languages. It supports various locales and allows the user to define a default locale for the conversion.
 
 ## Features
-
 - Convert numbers to words in multiple languages.
 - Supports localization for several languages (e.g., English, Arabic, French, German, Spanish, Turkish, Persian).
 - Handles decimal and negative numbers.
