@@ -1,6 +1,6 @@
-# number-to-string-locale
+# num-to-string-locale
 
-`number-to-string-locale` is a lightweight TypeScript package that converts numbers to their string representation in multiple languages. The package supports lazy loading of locale files, ensuring optimal performance.
+`num-to-string-locale` is a lightweight TypeScript package that converts numbers to their string representation in multiple languages. The package supports lazy loading of locale files, ensuring optimal performance.
 
 ## Features
 
@@ -14,13 +14,13 @@
 Install the package using npm:
 
 ```bash
-npm install number-to-string-locale
+npm install num-to-string-locale
 ```
 
 or using yarn:
 
 ```bash
-yarn add number-to-string-locale
+yarn add num-to-string-locale
 ```
 
 ## Supported Languages
@@ -44,7 +44,7 @@ The `numberToString` function is the main method to convert numbers to words. Us
 ### Example Code
 
 ```typescript
-import { numberToString, Locales } from "number-to-string-locale";
+import { numberToString, Locales } from "num-to-string-locale";
 
 (async () => {
     // Convert numbers to words in English
@@ -94,7 +94,7 @@ Clone the repository and install dependencies:
 
 ```bash
 git clone https://github.com/devzarghami/num-to-locale-string
-cd number-to-string-locale
+cd num-to-string-locale
 npm install
 ```
 
